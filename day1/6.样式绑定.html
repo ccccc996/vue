@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .active {
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 第一种方法 -->
+    <!--     <div id="app">
+      <p :class="bBar ? 'active' : ''">绑定样式</p>
+      <button @click="handleChange">change</button>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          bBar: true
+        },
+        methods: {
+          handleChange() {
+            this.bBar = !this.bBar
+          }
+        }
+      })
+    </script> -->
+
+    <!-- 第二种方法 -->
+    <!-- <div id="app">
+      <p :class="[bBar ? 'active' : '']">绑定样式</p>
+      <button @click="handleChange">change</button>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          bBar: true
+        },
+        methods: {
+          handleChange() {
+            this.bBar = !this.bBar
+          }
+        }
+      })
+    </script> -->
+
+    <!-- 第三种方法 -->
+    <!-- <div id="app">
+      <p :class="{active : bBar}">绑定样式</p>
+      <button @click="handleChange">change</button>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          bBar: true
+        },
+        methods: {
+          handleChange() {
+            this.bBar = !this.bBar
+          }
+        }
+      }) -->
+
+    <!-- 第四种方法 -->
+    <!-- <div id="app">
+      <p :class="[{active: bBar}]">绑定样式</p>
+      <button @click="handleChange">change</button>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          bBar: true
+        },
+        methods: {
+          handleChange() {
+            this.bBar = !this.bBar
+          }
+        }
+      }) -->
+
+    <!-- 第五种方法 -->
+    <div id="app">
+      <p :class="active">绑定样式</p>
+      <button @click="handleChange">change</button>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          active: 'active',
+          bBar: true
+        },
+        methods: {
+          handleChange() {
+            if (this.bBar) {
+              this.active = ''
+              this.bBar = !this.bBar
+              console.log(1)
+            } else {
+              this.active = 'active'
+              console.log(2)
+            }
+          }
+        }
+      })
+    </script>
+    
+  </body>
+</html>

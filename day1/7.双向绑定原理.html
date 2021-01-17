@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" />
+    <p></p>
+
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script> -->
+    <script>
+      const data = {
+        _msg: ''
+      }
+
+      Object.defineProperty(data, 'msg', {
+        get() {
+          // 这个 this 就是 data
+          return this._msg
+        },
+        set(newValue) {
+          this._msg = newValue
+
+          oP.innerHTML = this._msg
+          oInput.value = this._msg
+        }
+      })
+
+      // #1 这里的赋值会触发 set 方法，所以 data 中 _msg 变成了 'hello world'
+      // data.msg = 'hello world';
+      // #2 这里的取值会触发 get 方法，get 方法的返回值就是 data._msg
+      // console.log(data.msg);
+
+      const oP = document.querySelector('p')
+      const oInput = document.querySelector('input')
+
+      oInput.oninput = function (e) {
+        // 这一步的操作会反复触发 set 函数
+        data.msg = e.target.value
+      }
+    </script>
+  </body>
+</html>
