@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="item in list">{{item}}</li>
+      </ul>
+
+      <div>
+        <div>{{info.name}}</div>
+        <div>{{info.age}}</div>
+        <div>{{info.gender}}</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          fname: '',
+          list: ['apple', 'orange', 'banana'],
+          info: {
+            name: 'zs',
+            age: 12
+          }
+        }
+      })
+
+      // 数据已经修改成 ['apple', 'lemon', 'banana'] ，视图显示的还是 ['apple', 'orange', 'banana']
+      // 所以通过下标增加的数据并不是响应式的
+      // vm.list[1] = 'lemon'
+
+      // Vue.set(vm.list, 2, 'lemon')
+      // vm.$set(vm.list, 2, 'a')
+
+      // vm.info.gender = 'male'
+      // vm.$set(vm.info, 'gender', 'female')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>{{msg}}</div>
+      <button @click="update">更新</button>
+      <button @click="destroy">销毁</button>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: '生命周期'
+        },
+        methods: {
+          update: function () {
+            this.msg = 'hello'
+          },
+          destroy: function () {
+            this.$destroy()
+          }
+        },
+        beforeCreate: function () {
+          // 实例创建前，this 确实有，但是获取不到 data 中的数据
+          // console.log(data.msg)
+          console.log('beforeCreate')
+        },
+        created: function () {
+          // 这里可以尽可能早的拿到 data 中的数据
+          // 例如想根据数据尽可能早的发送请求，就可以这个钩子里面做
+          console.log('created')
+        },
+        beforeMount: function () {
+          // 渲染前
+          // this.$el 代表根元素
+          // 这一步获取不到界面中的数据
+          // console.log(this.$el.innerHTML);
+          console.log('beforeMount')
+        },
+        mounted: function () {
+          // 如果说需要尽可能早的获取渲染后的数据
+          // 可以任意的操作 DOM 或者渲染后的数据，也可以在此钩子里面发送请求
+          console.log(this.$el.innerHTML)
+          console.log('mounted')
+        },
+        beforeUpdate: function () {
+          // 更新数据前
+          console.log('beforeUpdate')
+        },
+        updated: function () {
+          // 更新数据后
+          console.log('updated')
+        },
+        beforeDestroy: function () {
+          // 组件销毁前
+          console.log('beforeDestroy')
+        },
+        destroyed: function () {
+          // 组件销毁后
+          console.log('destroyed')
+        }
+      })
+    </script>
+  </body>
+</html>
