@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>{{pmsg}}</div>
+      <menu-item :menu-title="ptitle"></menu-item>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script>
+      /* 父组件向子组件传值-props属性名规则 */
+      // components 定义的时候用驼峰（短横线），使用的时候用短横线
+      // props 传值注意点：传递的时候用短横线，接收的时候用驼峰
+
+      Vue.component('third-com', {
+        props: ['textTitle'],
+        template: `<div>{{textTitle}}</div>`
+      })
+
+      Vue.component('menu-item', {
+        props: ['menuTitle'],
+        template: `<div>{{menuTitle}}<third-com textTitle="hello"></third-com></div>`
+      })
+
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          pmsg: '父组件中的内容',
+          ptitle: '动态绑定属性'
+        }
+      })
+    </script>
+  </body>
+</html>

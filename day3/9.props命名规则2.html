@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <hello-word></hello-word>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script>
+      /* 父组件向子组件传值-props属性名规则 */
+      // components 定义的时候用驼峰（短横线），使用的时候用短横线
+      // props 传值注意点：传递的时候用短横线，接收的时候用驼峰
+
+      // #1 props 里面不止是能传数组，还能传输对象
+      Vue.component('hello-word', {
+        // 这里的 title 无法写条件判断 如果需要条件判断的时候这个方法就不行了
+        // props: ['title'],
+
+        // 可以设置传输的数据的类型
+        props: {
+          // 里面的属性需要追加的条件单一可以直接写，也可以写数组和对象
+          // title: Number
+          // title: [String, Number]
+          title: {
+            // type: [String, Number], // 通过 type 来指定要接受数据的类型
+            // required: true // 要求必传
+            // default: 100
+            // 对象或数组默认值必须从一个函数返回
+            // default: () => [1, 2]
+          }
+        },
+        template: `<div>{{title}}</div>`
+      })
+
+      const vm = new Vue({
+        el: '#app'
+      })
+    </script>
+  </body>
+</html>

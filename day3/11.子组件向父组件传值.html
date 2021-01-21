@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div :style="{fontSize: fontSize + 'px'}">{{pmsg}}</div>
+      <menu-item :parr="parr" @enlarge-text="handle" @add="handlePush"></menu-item>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+
+    <script>
+      Vue.component('menu-item', {
+        props: ['parr'],
+        template: `
+          <div>
+            <ul>
+              <li :key="index" v-for="(item, index) in parr">{{item}}</li>
+            </ul>
+            <button @click="parr.push(233)">添加数据1</button>
+            <button @click="$emit('enlarge-text')">添加数据2</button>
+            <button @click="$emit('add')">扩大父组件中字体大小</button>
+          </div>`
+      })
+
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          pmsg: '父组件中的内容',
+          parr: ['apple', 'orange', 'banana'],
+          fontSize: 10
+        },
+        methods: {
+          handle: function () {
+            this.fontSize += 5
+          },
+          handlePush() {
+            this.parr.push(233)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 显示： 子元素本身的属性 template:'<div>{{msg}}</div>'-->
+      <menu-item></menu-item>
+      <!-- 显示： 父组件中的内容 template:'<div>{{msg}}</div>'-->
+      <div>{{pmsg}}</div>
+      <!-- 显示： 子元素本身的属性-------来自父组件的值  template: '<div>{{msg + "-------" + title}}</div>'-->
+      <!-- 这里显示的 '来自父组件的值' 是假的，写死的静态数据 -->
+      <menu-item title="来自父组件的值"></menu-item>
+      <!-- 显示： 子元素本身的属性-------动态绑定属性  template: '<div>{{msg + "-------" + title}}</div>' -->
+      <!-- 这里显示的 '动态绑定属性' 是动态绑定上的 -->
+      <menu-item :title="ptitle"></menu-item>
+      <!-- 显示： 子元素本身的属性-------动态绑定属性-----hello -->
+      <!-- template: '<div>{{msg + "-------" + title + "------" + content}}</div>' -->
+      <!-- props: ['title', 'content'], content 为新增的 -->
+      <menu-item :title="ptitle" content="hello"></menu-item>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+
+    <script>
+      Vue.component('menu-item', {
+        props: ['title', 'content'],
+        data: function () {
+          return {
+            msg: '子元素本身的属性'
+          }
+        },
+        template: '<div>{{msg + "-------" + title + "------" + content}}</div>'
+      })
+
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          pmsg: '父组件中的内容',
+          ptitle: '动态绑定属性  '
+        }
+      })
+    </script>
+  </body>
+</html>
