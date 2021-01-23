@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script>
+      //   axios.defaults.baseURL = 'http:localhost:3000'
+
+      // await 必须放在 async 函数里面
+      // await 后面一般都要跟一个 Promise， await 之后的返回值就是这个promise resolve 的结果
+      // 用 async 修饰的函数都是异步函数，异步函数调用完毕的返回值是 promise
+      //   async function queryData() {
+      //     const r = await axios.get('adata')
+      //     console.log(r.data)
+      //   }
+
+      //   queryData()
+
+      function queryData(url) {
+        return new Promise((resolve, reject) => {
+          $.ajax({
+            url,
+            success(data) {
+              resolve(data)
+            },
+            error(err) {
+              reject(err)
+            }
+          })
+        })
+      }
+
+      async function run() {
+        let r1 = await queryData('http://127.0.0.1:3000/data')
+        let r2 = await queryData('http://127.0.0.1:3000/data1')
+        let r3 = await queryData('http://127.0.0.1:3000/data2')
+        return console.log(r1, r2, r3)
+      }
+
+      run()
+
+      //   queryData('http://127.0.0.1:3000/data')
+      //     .then((data) => {
+      //       console.log(data)
+      //       return queryData('http://127.0.0.1:3000/data1')
+      //     })
+      //     .then((data) => {
+      //       console.log(data)
+      //       return queryData('http://127.0.0.1:3000/data2')
+      //     })
+      //     .then((data) => {
+      //       console.log(data)
+      //     })
+    </script>
+  </body>
+</html>
